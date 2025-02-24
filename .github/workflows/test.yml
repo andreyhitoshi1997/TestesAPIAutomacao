@@ -1,21 +1,31 @@
-name: Run API Tests
+name: CI - Automação de Testes API
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
+      - name: Checkout do código
         uses: actions/checkout@v3
 
-      - name: Setup .NET
+      - name: Configurar .NET 8.0
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '7.0.x'
+          dotnet-version: '8.0.x' # Define o SDK do .NET 8
 
-      - name: Install dependencies
+      - name: Restaurar dependências
         run: dotnet restore
 
-      - name: Run tests
-        run: dotnet test --logger trx
+      - name: Compilar o projeto
+        run: dotnet build --no-restore
+
+      - name: Executar os testes
+        run: dotnet test --no-build --verbosity normal
