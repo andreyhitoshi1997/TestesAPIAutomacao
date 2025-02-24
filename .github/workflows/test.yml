@@ -16,10 +16,13 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v3
 
-      - name: Configurar .NET 8.0
+      - name: Instalar .NET 8.0
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x' # Define o SDK do .NET 8
+          dotnet-version: '8.0.x'
+
+      - name: Verificar versão do .NET
+        run: dotnet --info  # Exibe a versão do SDK instalada
 
       - name: Restaurar dependências
         run: dotnet restore
