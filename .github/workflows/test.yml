@@ -22,7 +22,7 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Verificar versão do .NET
-        run: dotnet --info  # Exibe a versão do SDK instalada
+        run: dotnet --info  # Exibe a versão instalada
 
       - name: Restaurar dependências
         run: dotnet restore
